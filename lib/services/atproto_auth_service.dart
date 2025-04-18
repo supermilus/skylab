@@ -37,4 +37,20 @@ class AtprotoAuthService {
       return false;
     }
   }
+
+  Future<bool> deleteAccount(String identifier, String password) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/com.atproto.server.deleteAccount'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'identifier': identifier,
+          'password': password,
+        }),
+      );
+      return response.statusCode == 200;
+    } catch (e) {
+      return false;
+    }
+  }
 }

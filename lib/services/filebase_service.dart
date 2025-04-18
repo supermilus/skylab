@@ -25,4 +25,12 @@ class FilebaseService {
       return null;
     }
   }
+
+  /// TODO: Deletes all files for a user. This is a placeholder; implement actual logic if Filebase supports it.
+  Future<bool> deleteAllUserFiles(String userId) async {
+    // Filebase/IPFS does not natively support deleting by user, only by CID.
+    // You must track uploaded CIDs per user and delete them individually if needed.
+    // Implement this logic as your app tracks user uploads.
+    return true;
+  }
 }

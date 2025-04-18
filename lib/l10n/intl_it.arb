@@ -1,4 +1,21 @@
 {
   "appTitle": "Skylab",
-  "welcome": "Benvenuto su Skylab!"
+  "welcome": "Benvenuto su Skylab!",
+  "settings": "Impostazioni",
+  "account": "Account",
+  "manageAccountSettings": "Gestisci le impostazioni dell'account",
+  "deleteAccount": "Elimina account",
+  "deleteAccountConfirm": "Sei sicuro di voler eliminare il tuo account? Questa azione non può essere annullata.",
+  "cancel": "Annulla",
+  "delete": "Elimina",
+  "about": "Informazioni",
+  "aboutSkylab": "Skylab - Clone di Instagram su AT Protocol",
+  "version": "Versione",
+  "confirmAtHandle": "Conferma AT Handle",
+  "atHandle": "AT Handle",
+  "ok": "OK",
+  "confirmPassword": "Conferma password",
+  "password": "Password",
+  "login": "Accedi",
+  "register": "Registrati"
 }
