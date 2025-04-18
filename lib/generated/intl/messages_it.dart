@@ -49,6 +49,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
     "login": MessageLookupByLibrary.simpleMessage("Accedi"),
+    "loginFailedPleaseCheckCredentials": MessageLookupByLibrary.simpleMessage(
+      "Login fallito. Per favore controlla le tue credenziali.",
+    ),
     "manageAccountSettings": MessageLookupByLibrary.simpleMessage(
       "Gestisci le impostazioni dell\'account",
     ),

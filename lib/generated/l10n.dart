@@ -249,6 +249,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Login failed. Please check your credentials.`
+  String get loginFailedPleaseCheckCredentials {
+    return Intl.message(
+      'Login failed. Please check your credentials.',
+      name: 'loginFailedPleaseCheckCredentials',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

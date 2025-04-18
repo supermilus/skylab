@@ -32,7 +32,8 @@ class _LoginPageState extends State<LoginPage> {
     if (!mounted) return;
     setState(() {
       _loading = false;
-      _error = success ? null : 'Login failed. Please check your credentials.';
+      _error = success ? null : S.of(context).loginFailedPleaseCheckCredentials;
+
     });
     if (success) {
       Provider.of<AuthProvider>(context, listen: false).login();

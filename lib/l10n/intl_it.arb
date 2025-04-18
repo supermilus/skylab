@@ -25,5 +25,6 @@
   "accountDeletedSuccessfully": "Account eliminato con successo.",
   "failedToDeleteAccount": "Impossibile eliminare l'account. Riprova.",
   "selectLanguage": "Seleziona lingua",
-  "registrationFailedPleaseTryAgain": "Impossibile completare la registrazione. Riprova."
+  "registrationFailedPleaseTryAgain": "Impossibile completare la registrazione. Riprova.",
+  "loginFailedPleaseCheckCredentials": "Login fallito. Per favore controlla le tue credenziali."
 }

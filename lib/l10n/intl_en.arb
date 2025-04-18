@@ -25,5 +25,6 @@
   "accountDeletedSuccessfully": "Account deleted successfully.",
   "failedToDeleteAccount": "Failed to delete account. Please try again.",
   "selectLanguage": "Select language",
-  "registrationFailedPleaseTryAgain": "Registration failed. Please try again."
+  "registrationFailedPleaseTryAgain": "Registration failed. Please try again.",
+  "loginFailedPleaseCheckCredentials": "Login failed. Please check your credentials."
 }
