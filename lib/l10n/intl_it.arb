@@ -17,5 +17,13 @@
   "confirmPassword": "Conferma password",
   "password": "Password",
   "login": "Accedi",
-  "register": "Registrati"
+  "register": "Registrati",
+  "home": "Home",
+  "search": "Cerca",
+  "notifications": "Notifiche",
+  "profile": "Profilo",
+  "accountDeletedSuccessfully": "Account eliminato con successo.",
+  "failedToDeleteAccount": "Impossibile eliminare l'account. Riprova.",
+  "selectLanguage": "Seleziona lingua",
+  "registrationFailedPleaseTryAgain": "Impossibile completare la registrazione. Riprova."
 }

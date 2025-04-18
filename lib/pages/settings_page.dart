@@ -3,19 +3,24 @@ import '../services/atproto_auth_service.dart';
 import '../services/filebase_service.dart';
 import '../generated/l10n.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
-  Future<void> _deleteAccount(BuildContext context) async {
-    final identifier = await _getIdentifier(context);
-    final password = await _getPassword(context);
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  Future<void> _deleteAccount() async {
+    final identifier = await _getIdentifier();
+    final password = await _getPassword();
     if (identifier == null || password == null) return;
 
     final authService = AtprotoAuthService();
     final filebaseService = FilebaseService();
     final userId = identifier;
 
-    final deleting = showDialog(
+    showDialog(
       context: context,
       barrierDismissible: false,
       builder: (context) => const Center(child: CircularProgressIndicator()),
@@ -24,43 +29,46 @@ class SettingsPage extends StatelessWidget {
     final authDeleted = await authService.deleteAccount(identifier, password);
     final filesDeleted = await filebaseService.deleteAllUserFiles(userId);
 
+    if (!mounted) return;
     Navigator.of(context).pop();
 
     if (authDeleted && filesDeleted) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(S.of(context).accountDeletedSuccessfully)),
       );
       Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
     } else {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(S.of(context).failedToDeleteAccount)),
       );
     }
   }
 
-  Future<String?> _getIdentifier(BuildContext context) async {
+  Future<String?> _getIdentifier() async {
     String? value;
     await showDialog(
       context: context,
-      builder: (context) {
+      builder: (dialogContext) {
         final controller = TextEditingController();
         return AlertDialog(
-          title: Text(S.of(context).confirmAtHandle),
+          title: Text(S.of(dialogContext).confirmAtHandle),
           content: TextField(
             controller: controller,
-            decoration: InputDecoration(labelText: S.of(context).atHandle),
+            decoration: InputDecoration(labelText: S.of(dialogContext).atHandle),
           ),
           actions: [
             TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text(S.of(context).cancel),
+              onPressed: () => Navigator.pop(dialogContext),
+              child: Text(S.of(dialogContext).cancel),
             ),
             TextButton(
               onPressed: () {
                 value = controller.text.trim();
-                Navigator.pop(context);
+                Navigator.pop(dialogContext);
               },
-              child: Text(S.of(context).ok),
+              child: Text(S.of(dialogContext).ok),
             ),
           ],
         );
@@ -69,30 +77,30 @@ class SettingsPage extends StatelessWidget {
     return value;
   }
 
-  Future<String?> _getPassword(BuildContext context) async {
+  Future<String?> _getPassword() async {
     String? value;
     await showDialog(
       context: context,
-      builder: (context) {
+      builder: (dialogContext) {
         final controller = TextEditingController();
         return AlertDialog(
-          title: Text(S.of(context).confirmPassword),
+          title: Text(S.of(dialogContext).confirmPassword),
           content: TextField(
             controller: controller,
-            decoration: InputDecoration(labelText: S.of(context).password),
+            decoration: InputDecoration(labelText: S.of(dialogContext).password),
             obscureText: true,
           ),
           actions: [
             TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text(S.of(context).cancel),
+              onPressed: () => Navigator.pop(dialogContext),
+              child: Text(S.of(dialogContext).cancel),
             ),
             TextButton(
               onPressed: () {
                 value = controller.text;
-                Navigator.pop(context);
+                Navigator.pop(dialogContext);
               },
-              child: Text(S.of(context).ok),
+              child: Text(S.of(dialogContext).ok),
             ),
           ],
         );
@@ -101,27 +109,27 @@ class SettingsPage extends StatelessWidget {
     return value;
   }
 
-  void _confirmDeleteAccount(BuildContext context) async {
+  void _confirmDeleteAccount() async {
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(S.of(context).deleteAccount),
-        content: Text(S.of(context).deleteAccountConfirm),
+      builder: (dialogContext) => AlertDialog(
+        title: Text(S.of(dialogContext).deleteAccount),
+        content: Text(S.of(dialogContext).deleteAccountConfirm),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: Text(S.of(context).cancel),
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(S.of(dialogContext).cancel),
           ),
           ElevatedButton(
-            onPressed: () => Navigator.pop(context, true),
+            onPressed: () => Navigator.pop(dialogContext, true),
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child: Text(S.of(context).delete),
+            child: Text(S.of(dialogContext).delete),
           ),
         ],
       ),
     );
     if (confirmed == true) {
-      await _deleteAccount(context);
+      await _deleteAccount();
     }
   }
 
@@ -140,7 +148,7 @@ class SettingsPage extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.delete, color: Colors.red),
             title: Text(S.of(context).deleteAccount, style: const TextStyle(color: Colors.red)),
-            onTap: () => _confirmDeleteAccount(context),
+            onTap: _confirmDeleteAccount,
           ),
           const Divider(),
           ListTile(

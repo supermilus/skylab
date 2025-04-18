@@ -17,5 +17,13 @@
   "confirmPassword": "Confirm Password",
   "password": "Password",
   "login": "Login",
-  "register": "Register"
+  "register": "Register",
+  "home": "Home",
+  "search": "Search",
+  "notifications": "Notifications",
+  "profile": "Profile",
+  "accountDeletedSuccessfully": "Account deleted successfully.",
+  "failedToDeleteAccount": "Failed to delete account. Please try again.",
+  "selectLanguage": "Select language",
+  "registrationFailedPleaseTryAgain": "Registration failed. Please try again."
 }

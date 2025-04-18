@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../services/atproto_auth_service.dart';
+import '../services/auth_provider.dart';
+import '../generated/l10n.dart';
+import 'main_menu_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -25,12 +29,16 @@ class _LoginPageState extends State<LoginPage> {
       _identifierController.text.trim(),
       _passwordController.text,
     );
+    if (!mounted) return;
     setState(() {
       _loading = false;
       _error = success ? null : 'Login failed. Please check your credentials.';
     });
     if (success) {
-      // TODO: Navigate to home page
+      Provider.of<AuthProvider>(context, listen: false).login();
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const MainMenuScreen()),
+      );
     }
   }
 
@@ -141,12 +149,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
       _handleController.text.trim(),
       _passwordController.text,
     );
+    if (!mounted) return;
     setState(() {
       _loading = false;
-      _error = success ? null : 'Registration failed. Please try again.';
+      _error = success ? null : S.of(context).registrationFailedPleaseTryAgain;
     });
     if (success) {
-      Navigator.of(context).pop();
+      context.read<AuthProvider>().login();
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const MainMenuScreen()),
+      );
     }
   }
 
